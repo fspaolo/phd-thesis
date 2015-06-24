@@ -1,5 +1,7 @@
-LaTeX template for my PhD Dissertation, modified from:
-======================================================
+LaTeX template for my PhD Dissertation
+======================================
+
+Modified from:
 
 UCSD Doctoral Dissertation LaTeX Class
 --------------------------------------
