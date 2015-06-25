@@ -101,7 +101,7 @@ A satellite radar altimeter measures the satellite-to-surface round-trip travel 
   h = h_\text{s} - R - \epsilon
 \end{equation}
 
-where $h$ is the height of the surface with respect to the ellipsoid, $h_\text{s}$ is the satellite's altitude, $R$ is the satellite-to-surface measured range, and $\epsilon$ represents the atmospheric path delay (accounted for). By performing repeat measurements one can track changes in the ice-shelf height, that relates to the ice-shelf mass balance as follows
+where $h$ is the height of the surface with respect to the ellipsoid, $h_\text{s}$ is the satellite's altitude, $R$ is the satellite-to-surface measured range, and $\epsilon$ represents the atmospheric path delay (accounted for). By performing repeated measurements one can track changes in the ice-shelf height, that relates to the ice-shelf mass balance as follows
 
 \begin{equation}
 \begin{split}
@@ -137,7 +137,7 @@ Generally, the range of estimates in IPCC07\footnote{Define IPCC07.} encompassed
 
 This highlights the need to account for uncertainties in a more consistent way, as well as analyzing these inherently noisy and complex measurements with robust statistical estimation procedures.
 
-\section*{Objectives and thesis organization}
+\section*{Scientific objectives}
 
 [SEE "ORGANIZATION" EXAMPLE OF BOOK: TREES, MAPS, AND...]
 
@@ -171,9 +171,39 @@ To be achieved with the conclusion of the following objectives:
   atmosphere and the ocean ({\it e.g.}, El Ni\~{n}o Southern Oscillation).
 \end{enumerate}
 
-In this sense, the thesis is organized in [FOUR?] chapters. Each chapter was designed as a self-contained piece of work to address the general objectives proposed in this dissertation (above). {\sc Chapter~2} describes the full methodology implemented in this study (partially developed and partially modified from previous works) to construct the longest, continuous, high-resolution (in time and space) time series of changes in ice-shelf surface-height from multiple satellite radar altimeters. In this chapter the RA data and corrections are discussed, and new processing approaches are proposed. This chapter is currently in review for publication in the journal {\it Remote Sensing of Environment}. {\sc Chapter~3} describes the trend analysis approach implemented in the ice-shelf-height time-series product, as well as reports and discusses the findings, which have advanced significantly our understanding on the state of Antarctic ice shelves. This chapter is published in the journal {\it Science}. {\sc Chapter~4} focuses on the variability analysis of the ice-shelf-height time series. This chapter investigates the origin of interannual fluctuations in the ice-shelf volume, and seeks to understand the links between observe changes and large-scale climate variability. This chapter is currently in preparation for submission \emph{after} the dissertation defense.
+\section*{Thesis outline}
+
+This thesis is organized in four chapters. Each chapter was designed as a self-contained piece of work to address the general objectives proposed in this dissertation (above). {\sc Chapter~1} (this current chapter) presents an introduction to the scientific questions being addressed and the background necessary to follow the work done in Chapters 2--4. {\sc Chapter~2} describes the full methodology implemented in this study (partially developed and partially modified from previous works) to construct the longest, continuous, high-resolution (in time and space) time series of changes in ice-shelf surface-height from multiple satellite radar altimeters. In this chapter the RA data and corrections are discussed, and new processing approaches are proposed. This chapter is currently in review for publication in the journal {\it Remote Sensing of Environment}. {\sc Chapter~3} describes the trend analysis approach implemented in the ice-shelf-height time-series product (derived in Chapter 2), as well as reports and discusses the findings, which have advanced significantly our understanding on the state of the Antarctic ice shelves. This chapter is published in the journal {\it Science}. {\sc Chapter~4} focuses on the variability analysis of the ice-shelf-height time series. This chapter investigates the origin of interannual fluctuations in the ice-shelf volume, and seeks to understand the links between observe changes and large-scale climate variability. This chapter is currently in preparation for submission \emph{after} the dissertation defense.
 
 \section*{Summary of results}
 
+This thesis presents a method for optimal analyses of ice-shelf-height data from multiple satellite RAs and estimation of uncertainties in the resulting data products. We constructed an 18-year time series of height changes at $\sim$30 km grid cells and $\sim$3 month intervals over Antarctica's floating ice shelves. Our data set allowed us to estimate, with high statistical confidence (95\% level), the temporal progression and spatial structure of ice-shelf height changes in Antarctica between 1994 and 2012.
 
-In selecting an optimal backscatter correction scheme we tested three different approaches. We correlated series of backscatter and height changes: i) using the cross-calibrated full 18-year record, ii) sliding 2 and 3-year windows (similar to Khvorostovsky (2012)) and iii) using independent single-mission records. On each approach we performed the correlations using both the original time series (absolute values) and the differenced series (derivative). We found that the 3rd approach was the only to perform consistently under a variety of conditions ({\it e.g.}, high vs. low variance, high vs. low correlation, high vs. low heteroscedasticity). Using differenced series is equivalent to using high-pass filtered records and, therefore, higher correlations are expected since backscatter change is primarily a function of seasonality. However, in using this approach only the short-term fluctuations in backscatter are being taken into account. Hence, we corrected our height-change records by correlating series of absolute values (iii).
+We have demonstrated that: Substantial averaging both in time and space is required to construct RA height records over floating ice shelves. Densification of the surface greatly affects the height-change estimate, and backscatter correction significantly reduces this effect. Densification is a more important effect than penetration in biasing the height-change estimates over the ice shelves. Given the high interannual-to-decadal variability that is present, a simple straight-line fit fails to capture the underlying trends, some degree of curvature in the trend is needed. Polynomial trends allow to obtain information on the evolution and spatial structure of changes, such as instantaneous rate of change (derivative of the trend) and average acceleration (slope of the derivative). Given the convoluted nature of the error sources, we propose that a top-down approach for uncertainty estimation (e.g., bootstrap applied to time-dependent data) constitutes a more accurate alternative for error analysis.
+
+We have shown that Antarctic ice-shelf volume
+loss is accelerating. In the Amundsen Sea,
+some ice shelves buttressing regions of grounded
+ice that are prone to instability have experienced
+sustained rapid thinning for almost two decades.
+If the present climate forcing is sustained, we
+expect a drastic reduction in volume of the rapidly
+thinning ice shelves at decadal to century
+time scales, resulting in grounding-line retreat
+and potential ice-shelf collapse. Both of these processes
+further accelerate the loss of buttressing,
+with consequent increase of grounded-ice
+discharge and sea-level rise. On smaller scales,
+ice-shelf thickness variability is complex, demonstrating
+that results from single satellite missions
+with typical durations of a few years are
+insufficient to draw conclusions about the long-term
+response of ice shelves. Large changes occur
+over a wide range of time scales, with rapid variations
+of ice-shelf thickness suggesting that ice
+shelves can respond quickly to changes in oceanic
+and atmospheric conditions.
+
+\section*{Future research}
+
+Our preliminary results on the variability analysis performed to the 18-year record of ice-shelf height changes, show that there is significant interannual fluctuations in Antarctic ice-shelf volume. Besides advancing our understanding on how the oceanic and atmospheric forcing impacts the ice sheet, this has also important implications for estimating changes in freshwater fluxes around Antarctica. With the aid of innovative mathematical tools for analyzing sets of short and noisy records (e.g., multi-variate singular spectrum analysis), we have estimated the spectrum of sub-decadal changes for some key regions in West Antarctica. We found statistically significant peaks (energy content) in two particular frequency bands: $\sim$1 year (the expected contribution from the seasonal cycle) and $\sim$4--6 years. Interestingly, the latter coincides with the characteristic spectral signature of El Ni\~no Southern Oscillation (ENSO) as derived from the Sourthern Oscillation Index (SOI). The ENSO has been shown to affect sea-surface pressure and, consequently, sea-ice conditions in the Amundsen and Bellingshausen seas. Although the Antarctic response to ENSO forcing is not ubiquitous, it is reasonable to expect that this large-scale climate variation will be felt by the floating ice shelves as well. Investigating potential linkages between tropical-climate variability and changes in the Antarctic ice shelves is the subject of a planned postdoctoral project.
