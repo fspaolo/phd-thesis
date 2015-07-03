@@ -133,7 +133,7 @@ shrink=10
 
 % FOOTNOTES - formatting the defaul footnotes (reverse indent and marging)
 \makeatletter
-\renewcommand\@makefntext[1]{\leftskip=2em\hskip-2em\@makefnmark#1}
+\renewcommand\@makefntext[1]{\leftskip=2em\hskip-0em\@makefnmark#1} % 2em and -2em
 \makeatother
 
 %% AMS PACKAGES - Chances are you will want some or all 
@@ -176,11 +176,11 @@ shrink=10
 % \usepackage{mathptmx}
 
 % Palatino
-\usepackage{mathpazo}
+%\usepackage{mathpazo}
 
 % Bitstream Charter
-%\usepackage[T1]{fontenc}
-%\usepackage[charter]{mathdesign}
+\usepackage[T1]{fontenc}
+\usepackage[charter]{mathdesign} % w/math
 
 
 % DROP CAPS
@@ -240,7 +240,7 @@ refsegment=chapter,    % if using a global .bib file
 %% FRONT MATTER
 %
 %  This includes the title, degree, dedication, vita, abstract, etc..
-\include{frontmatter}
+%\include{frontmatter}
 
 
 
@@ -254,11 +254,11 @@ refsegment=chapter,    % if using a global .bib file
 % Then use the commands:
 
 \include{chapter1}
-[References: single-spaced with a double space between entries]
+[MAKE REFERENCES SINGLE-SPACED WITH A DOUBLE SPACE BETWEEN ENTRIES]
 \printbibliography[segment=1,heading=subbibliography]
 
-%\include{chapter2}
-%\printbibliography[segment=2,heading=subbibliography]
+\include{chapter2}
+\printbibliography[segment=2,heading=subbibliography]
 
 %\include{chapter3}
 %\printbibliography[segment=3,heading=subbibliography]

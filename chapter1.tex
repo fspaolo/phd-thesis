@@ -6,13 +6,17 @@
 
 \chapter{Introduction and background}
 
+% Thesis outline (here?)
+This thesis is organized in four chapters. Each chapter was designed as a self-contained piece of work to address the general objectives proposed in this dissertation (below). {\sc Chapter~1} presents an introduction to the scientific questions being addressed and the background necessary to follow the work developed in Chapters 2--4. {\sc Chapter~2} describes the full methodology implemented in this study (partially developed and partially modified from previous works) to construct the longest, continuous, high-resolution (in time and space) time series of changes in ice-shelf surface-height from multiple satellite radar altimeters. In this chapter the RA data and corrections are discussed, and new processing approaches are proposed. This chapter is currently in review for publication in {\it Remote Sensing of Environment}. {\sc Chapter~3} describes the trend analysis approach implemented in the ice-shelf-height time-series product (derived in Chapter 2), as well as reports and discusses the core findings of this thesis, which have advanced significantly our understanding on the state of the Antarctic ice shelves. This chapter is published in the journal {\it Science}. {\sc Chapter~4} focuses on the variability analysis of the ice-shelf-height time series. This chapter investigates the origin of interannual fluctuations in the ice-shelf volume, and seeks to understand the links between observe changes and large-scale climate variability. This chapter is currently in preparation for submission \emph{after} the dissertation defense.
+
+
 \section*{Ice shelves, ice-sheet and sea-level rise}
 
 \lettrine[lines=2]{T}{he Antarctic Ice Sheet loses} most of its mass from its fringing ice shelves\footnote{
 The ice shelves loose their mass through either iceberg calving or basal melting
 (see Figure \ref{ch1fig1}).},
 the marginal floating extensions of inland glaciers and ice streams. More than 80\% of
-Antarctica's ice drains through the ice shelves, where most of the mass
+Antarctica's ice drains through ice shelves, where most of the mass
 lost from the ice sheet is transferred to the ocean. The Antarctic Ice Sheet
 contains ice equivalent to $\sim$58 m of global sea-level rise
 \parencite{Fretwell2013}, and has been losing mass at an average rate of
@@ -48,7 +52,7 @@ increases scaling nonlinearly with grounding line (GL)\footnote{The ground line
 is the dynamic boundary between the grounded ice sheet and the floating ice shelves;
 where glaciers detach from the bedrock and start afloat.} thickness to
 compensate for the reduction in \emph{buttressing} [7, 21]. This nonlinear dynamics,
-flow $\propto$ thickness$^{n \geqslant 3}_\text{GL}$, becomes particularly important in
+flow~$\propto$~thickness$^{n \geqslant 3}$ (at the GL), becomes particularly important in
 regions where (a) the ice sheet is
 grounded below sea level (marine ice sheet) and (b) the bed deepens inwards
 (retrograde bed slope). Such configuration gives rise to a condition of unstable
@@ -105,16 +109,30 @@ where $h$ is the height of the surface with respect to the ellipsoid, $h_\text{s
 
 \begin{equation}
 \begin{split}
-  \frac{\partial h}{\partial t} &= \frac{\partial \Delta}{\partial t}
-    - M \, \frac{\partial}{\partial t} \, \rho^{-1}_\text{w}
-    + \int^M_0 \text{d}m \, \frac{\partial}{\partial t} \, \rho^{-1}_\text{f}(m) \\
-    &\quad + ( \rho^{-1}_\text{i} - \rho^{-1}_\text{w} ) 
-              \left( \dot{M}_\text{s} + \dot{M}_\text{b} + \vect{u} \cdot \nabla M
-              + M \nabla \cdot \vect{u} \right)
+  \frac{\partial h}{\partial t} &= 
+    \overbrace{
+      \frac{\partial \Delta}{\partial t}
+      \rule[20pt]{0pt}{5pt}}^{\mbox{a}}
+    -\overbrace{
+      M \, \frac{\partial}{\partial t} \, \rho^{-1}_\text{w}
+      \rule[20pt]{0pt}{5pt}}^{\mbox{b}}
+    +\overbrace{
+      \int^M_0 \text{d}m \, \frac{\partial}{\partial t} \, \rho^{-1}_\text{f}(m)
+      \rule[20pt]{0pt}{5pt}}^{\mbox{c}} \\
+    &\quad +\underbrace{
+      ( \, \rho^{-1}_\text{i} - \rho^{-1}_\text{w} \, ) 
+      \rule[-11pt]{0pt}{5pt}}_{\mbox{d}}
+    \cdot \, ( \, 
+      \underbrace{ \dot{M}_\text{s} + \dot{M}_\text{b}
+      \rule[-11pt]{0pt}{5pt}}_{\mbox{e}}
+      + \, 
+      \underbrace{ \vect{u} \cdot \nabla M + M \nabla \cdot \vect{u} 
+      \rule[-11pt]{0pt}{5pt}}_{\mbox{g}}
+    \, )
 \end{split}
 \end{equation}
 
-where...[explanation of each component]
+where each term represents (a) sea-level variations, (b) ocean density changes, (c) firn compaction, (d) ice-ocean density contrast, (e) surface and basal accumulation rates, respectively, (f) advection of thickness gradient and flow divergence, respectively. [explanation of each symbol]
 
 With the demonstrated capability of all-wheather-operational radar altimeters
 (Figure: RA measurement scheme)
@@ -135,7 +153,7 @@ $+$50 to $-$250 Gt year$^{-1}$ for 1992--2009 \parencite{Zwally2011}. As reporte
 Generally, the range of estimates in IPCC07\footnote{Define IPCC07.} encompassed the errors listed in the studies, but as noted in the report, a mid-range value does not indicate a more reliable estimate, and the composite errors listed in each study do not define confidence limits because important components lack formal statistical derivation. This caution on the error estimates applies to all studies regardless of methods of data collection and analyses.
 \end{quotation}
 
-This highlights the need to account for uncertainties in a more consistent way, as well as analyzing these inherently noisy and complex measurements with robust statistical estimation procedures.
+This highlights the need to account for uncertainties in a more consistent way, as well as analyzing the inherently noisy and complex altimeter measurements within a robust statistical framework.
 
 \section*{Scientific objectives}
 
@@ -171,9 +189,9 @@ To be achieved with the conclusion of the following objectives:
   atmosphere and the ocean ({\it e.g.}, El Ni\~{n}o Southern Oscillation).
 \end{enumerate}
 
-\section*{Thesis outline}
 
-This thesis is organized in four chapters. Each chapter was designed as a self-contained piece of work to address the general objectives proposed in this dissertation (above). {\sc Chapter~1} (this current chapter) presents an introduction to the scientific questions being addressed and the background necessary to follow the work done in Chapters 2--4. {\sc Chapter~2} describes the full methodology implemented in this study (partially developed and partially modified from previous works) to construct the longest, continuous, high-resolution (in time and space) time series of changes in ice-shelf surface-height from multiple satellite radar altimeters. In this chapter the RA data and corrections are discussed, and new processing approaches are proposed. This chapter is currently in review for publication in the journal {\it Remote Sensing of Environment}. {\sc Chapter~3} describes the trend analysis approach implemented in the ice-shelf-height time-series product (derived in Chapter 2), as well as reports and discusses the findings, which have advanced significantly our understanding on the state of the Antarctic ice shelves. This chapter is published in the journal {\it Science}. {\sc Chapter~4} focuses on the variability analysis of the ice-shelf-height time series. This chapter investigates the origin of interannual fluctuations in the ice-shelf volume, and seeks to understand the links between observe changes and large-scale climate variability. This chapter is currently in preparation for submission \emph{after} the dissertation defense.
+%\section*{Thesis outline}
+
 
 \section*{Summary of results}
 
@@ -206,4 +224,4 @@ and atmospheric conditions.
 
 \section*{Future research}
 
-Our preliminary results on the variability analysis performed to the 18-year record of ice-shelf height changes, show that there is significant interannual fluctuations in Antarctic ice-shelf volume. Besides advancing our understanding on how the oceanic and atmospheric forcing impacts the ice sheet, this has also important implications for estimating changes in freshwater fluxes around Antarctica. With the aid of innovative mathematical tools for analyzing sets of short and noisy records (e.g., multi-variate singular spectrum analysis), we have estimated the spectrum of sub-decadal changes for some key regions in West Antarctica. We found statistically significant peaks (energy content) in two particular frequency bands: $\sim$1 year (the expected contribution from the seasonal cycle) and $\sim$4--6 years. Interestingly, the latter coincides with the characteristic spectral signature of El Ni\~no Southern Oscillation (ENSO) as derived from the Sourthern Oscillation Index (SOI). The ENSO has been shown to affect sea-surface pressure and, consequently, sea-ice conditions in the Amundsen and Bellingshausen seas. Although the Antarctic response to ENSO forcing is not ubiquitous, it is reasonable to expect that this large-scale climate variation will be felt by the floating ice shelves as well. Investigating potential linkages between tropical-climate variability and changes in the Antarctic ice shelves is the subject of a planned postdoctoral project.
+Our preliminary results on the variability analysis performed to the 18-year record of ice-shelf height changes, show that there is significant interannual fluctuations in Antarctic ice-shelf volume. Besides advancing our understanding on how the oceanic and atmospheric forcing impacts the ice sheet, this has also important implications for estimating changes in freshwater fluxes around Antarctica. With the aid of innovative mathematical tools for analyzing sets of short and noisy records (such as multi-variate singular spectrum analysis), we have estimated the spectrum of sub-decadal changes for some key regions in West Antarctica. We found statistically significant peaks (energy content) in two particular frequency bands: $\sim$1 year (the expected contribution from the seasonal cycle) and $\sim$4--6 years. Interestingly, the latter coincides with the characteristic spectral signature of El Ni\~no Southern Oscillation (ENSO) as derived from the Sourthern Oscillation Index (SOI). The ENSO has been shown to affect sea-surface pressure and, consequently, sea-ice conditions in the Amundsen and Bellingshausen seas. Although the Antarctic response to ENSO forcing is not ubiquitous, it is reasonable to expect that this large-scale climate variation will be felt by the floating ice shelves as well. Investigating potential linkages between tropical-climate variability and changes in the Antarctic ice shelves is the subject of a planned postdoctoral project.
