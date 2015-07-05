@@ -199,4 +199,174 @@ We found no correlation between the firn height changes and RA-derived changes i
   \label{c2f5}
 \end{figure}
 
+\subsection{Merging individual satellite mission time series}
 
+The analyses described in Sections \ref{3.1} to \ref{3.4} led to independent time series for each of the three satellite missions. These time series then need to be concatenated and further quality-controlled to generate the long multi-mission record of ice-shelf height. At each grid cell we cross-calibrated the records from the three satellite missions by computing the offsets (weighted-average of differences) between the time series during the periods where consecutive missions overlapped (ERS-1 to ERS-2: 1995--1996 and ERS-2 to Envisat: 2002--2003). We excluded the first two years of ERS-1 data (1992--1994) from our analysis because they show an apparent strong negative anomaly that extends over several sectors of Antarctica, and this anomaly also appears in the altimeter's backscatter. In the absence of evidence supporting such a strong continental-scale signal, we assume this feature is an artifact of the data. Our final dataset therefore spans 18 years from 1994 to 2012.
+
+We corrected a few step changes greater than 3 m (usually associated with anomalous backscatter) by leveling the segments on each side by the difference in their medians, and removed any peak greater than 3 standard deviations from the polynomial trend (see below). We rejected full 18-year records if time series from any of the three missions did not overlap due to data gaps, or if the full data set spanned less than 70\% of the 18-year time interval. We also rejected time series that were visibly of poor quality.
+
+\section{Time series analysis}
+
+Estimating the evolution of changes in ice-shelf height is an important step for fingerprinting the oceanic and atmospheric processes driving such changes. A challenging task in analysis of any climate data is the extraction of underlying trends from relatively short and noisy records, particularly when there is considerable change in variance within the record itself (heterocesdasticity). Ice shelves couple with the atmosphere (temperature, radiation balance, precipitation and wind stress), ocean (circulation, temperatures and waves), and sea ice (concentration and thickness), over a wide range of time scales \parencite{Paolo2015}. Estimated trends are, therefore, strongly dependent upon length of the time interval over which the trends are calculated.
+
+Previous authors have adopted a variety of approaches for trend extraction such as fitting simple straight lines \parencite{Pritchard2012, Shepherd2010}, quadratics \parencite{Wingham2009}, cubics \parencite{Schenk2012}, sinusoidals \parencite{Zwally2005}, and using autoregressive models \parencite{Davis2005}. We took a different approach by (i) not defining {\it a-priori} the model to fit (polynomial of degree 0, 1, 2 or 3), and (ii) taking into account both bias and variance in the fitting procedure ({\it i.e.}, regularization).
+
+\subsection{Extracting trends from height-change time series}
+
+We fitted low-order polynomial models to each time series (Figure 6), allowing the degree m to vary from 0 (constant height) to 3 (cubic fit), using a combination of lasso regularized-regression for smooth fitting \parencite{Tibshirani1996} and cross-validation for model-parameter selection to find the optimal solution ({\it i.e.}, optimal amount of regularization and degree of the best polynomial fit). With this bias-variance-tradeoff approach, our objective is to allow a degree of curvature for estimating potential acceleration of height-change rate while avoiding the rapid oscillations introduced by ordinary least-squares polynomial fits \parencite{Paolo2015}. The polynomials are defined as (dropping the spatial variable for generalization):
+
+\begin{equation}
+  \hat h(\tau) = \sum_{m=0}^3 \beta_m \, \tau^m
+  \label{c2e5}
+\end{equation}
+
+\noindent
+where $\hat h$ is the polynomial model, and $\beta_m$ are the coefficients of the polynomial. We then calculated average and instantaneous rates of change as the slope of the secant and tangent lines, respectively, to the fitted polynomial by finite difference approximation (see Figure \ref{c2f6}). 
+
+In estimating ice surface-height trends we allow for a trend $\dot p$ in sea-surface height due to the inverse barometer effect associated with a regional atmospheric-pressure trend \parencite{Padman2003}, and a regional sea-level trend $\dot \eta$. The average rate of change $\Delta \hat h/\Delta \tau$ between two times $\tau_i$ and $\tau_j$ is then given by:
+
+\begin{equation}
+  \frac{\Delta \hat h}{\Delta \tau} = 
+    \frac{\hat h(\tau_j) - \hat h(\tau_i)}{\tau_j - \tau_i}
+    + \dot p + \dot \eta
+  \label{c2e6}
+\end{equation}
+
+
+\begin{figure}[!ht]
+  \includegraphics[width=\textwidth]{../img/map_single_series_v9b.png}
+  \caption{
+  Examples of single-grid-cell 18-year time series over the Antarctic ice shelves. (top) Map showing individual grid cells with estimated 18-year mean polynomial trends over the ice shelves for one sector of Antarctica (inset map). The grid was smoothed and interpolated using a Gaussian Kernel with sigma equals grid-cell size.  (lower panels) Comparison of polynomial versus straight-line fits for trend determination on three individual height-change time series (locations shown in map). The average polynomial rate is estimated from the slope of the line connecting the polynomial end points (Eq. \ref{c2e6}).
+  } 
+  \label{c2f6}
+\end{figure}
+
+
+To estimate average acceleration we calculated the mean slope of the (numerical) derivative of the polynomial fit (second derivative). We performed the regularized regression procedure in two ways: a) on each individual grid-cell time series (over 2650 cells), which we used to construct spatial maps of average ice-shelf height changes (Figure \ref{c2f6}); and b) on ice-shelf-wide and region-wide average time series for estimating regional trends (Figure \ref{c2f7}; \parencite{Paolo2015}). 
+
+Performing regularized regression on regional-average time series, where each point is the average of many other points, is preferred over aggregating estimates of trends from fitted polynomials on individual grid cells. In the latter the regularized regression is not as well constrained due to a lower signal-to-noise ratio (Figure \ref{c2f8}). A consequence of this analysis approach to trend estimation is that the sum of ice-shelf/regional values does not equal the total value computed for all of Antarctica. This is because different region sizes lead to different constraints in the regression; all estimates are consistent, however, within the formal errors.
+
+
+\begin{figure}[!ht]
+  \includegraphics[width=\textwidth]{../img/tseries_v4.png}
+  \caption{
+  Regional time series of average Antarctic ice-shelf height for: (top) West Antarctic ice shelves; (middle) East Antarctic ice shelves; and (bottom) all Antarctic ice shelves. Adapted from \textcite{Paolo2015}.
+  } 
+  \label{c2f7}
+\end{figure}
+
+
+\begin{figure}[!ht]
+  \includegraphics[width=\textwidth]{../img/map_noisy_series_v3.png}
+  \caption{
+  Comparison of noise level of single-grid-cell vs. ice-shelf-average time series. (top) Example of time series derived for three individual grid cells on Larsen-C Ice Shelf. Green lines show polynomial fits. Differences between single-cell time series represent both true spatial variations (signal) and contributions from noise. (bottom) Time series generated by averaging all individual-grid-cell time series over the entire Larsen-C Ice Shelf. The polynomial is fitted to the averaged time series (it is not the average of single-cell fits).
+  } 
+  \label{c2f8}
+\end{figure}
+
+
+\subsection{Estimating uncertainties}
+
+\subsubsection{Time series error bars}
+
+Our averaging procedure facilitates the formal derivation of statistical error for individual height values within each mean time series. Two factors contribute to lower the uncertainty in the height estimates: i) the large number of crossovers that contribute to the final height estimate per location per time step ($\sim$10--100); and ii) the long-period records (18 years), which makes the derivation of long-term slopes robust to high-frequency fluctuations ({\it e.g.}, seasonality).
+
+Our uncertainties are meant to reflect: (a) the sampling error (number of crossovers); and (b) the backscatter-related error. Hence, we derived the time-series error bars as:
+
+\begin{equation}
+  \delta h(\mathbf x,\tau) = \sqrt{
+    \text{SE}[\Delta h(\mathbf x,\tau)]^2
+    + \text{SE}[h(\mathbf x)_\text{cor} - h(\mathbf x)_\text{unc}]^2
+    }
+  \label{c2e7}
+\end{equation}
+
+\noindent
+where $\text{SE}[\,]$ is the standard error, $\Delta h(\mathbf x,\tau)$ represents all height differences at time $\tau$ and grid-cell location $\mathbf x$ (these are the crossovers being averaged at each block in Eq. \ref{c2e2}), and $h(\mathbf x)$ is the formed height record at each grid cell, backscatter corrected (cor) and uncorrected (unc). The first term on the right-hand side represents the noise at the grid-cell level (time and spatially dependent). The second term assesses the magnitude of the backscatter-series to height-series correlation (spatially dependent), and we assume a worst-case error equal to the backscatter correction. Both terms refer to the mean time series (Eqs. \ref{c2e3} and \ref{c2e4}).
+
+\subsubsection{Trend and acceleration error bars}
+
+We estimated the uncertainties in the derived trends from the polynomial fits based on the variance of the residuals. In general this provides a higher uncertainty than that derived from the individual data points. This is because the spread of the residuals arises from true natural variability in addition to observational uncertainty. Furthermore, the spread of the residuals contain valuable information on whether the polynomial fit is a good statistical model for the data. We computed the residuals as:
+
+\begin{equation}
+  \varepsilon(\tau) = h(\tau) - \hat h(\tau)
+  \label{c2e8}
+\end{equation}
+
+\noindent
+where $\varepsilon$ are the residuals, $h$ is the observed time series of height changes and $\hat h$ is the polynomial fit. We then used the 'bootstrap' approach \parencite{Efron1993} in which the residuals of the polynomial fit are randomly resampled with replacement. That is, every subsample of the residuals contains data from the original sample that can appear multiple times, so that each subsample have the same number of elements as the original data set, but with less information about the noise (with respect to the fit). We then added back each resampled residual to the original fitted model to construct the bootstrap samples, {\it i.e.}
+
+\begin{equation}
+  h^*(\tau) = \hat h(\tau) + \varepsilon^*(\tau)
+  \label{c2e9}
+\end{equation}
+
+\noindent
+where $h^*$ is the bootstrap time series and $\varepsilon^*$ are the resampled residuals. We refit the polynomial model (as previously described) to each bootstrap time series and calculated the following: average rate of change, the derivative of the polynomial and the average rate of change of the derivative (average acceleration). By doing this repeatedly, we constructed an empirical distribution for each parameter of interest. We then estimated formal confidence intervals (95\%) from this distribution. We constructed 1000 bootstrap samples for each individual ice-shelf/region time series, and 500 for each grid-cell time series (a total of $\sim$1,330,000 sets of calculations). We note that in the case of the residuals not being independent (an implicit assumption of our approach), a 'block-bootstrap' resampling could be used instead. In this variant, blocks of data are shuffled instead of individual points in order to preserve local structures in time ({\it i.e.}, correlations).
+
+The total uncertainty in the estimated ice-shelf height rate also includes the systematic component coming from the regional sea-level change and inverse barometer effect. However, these terms are an order of magnitude smaller than the bootstrap-derived component. The uncertainty is then given by:
+
+\begin{equation}
+  \delta \dot h = \sqrt{
+    (\delta \dot h^*)^2 + (\delta \dot \eta)^2 + (\delta \dot p)^2
+    }
+  \label{c2e10}
+\end{equation}
+
+\noindent
+where $\delta \dot h^*$ is the uncertainty in the rate of height change at the 95\% confidence level from the bootstrap distribution, $\delta \dot \eta$ and $\delta \dot p$ are the uncertainties in regional sea-level and regional atmospheric pressure trends, respectively.
+
+Estimating uncertainties using bootstrapping is a 'top-down' approach, which has the advantage of not relying on the assumption that characteristics of the noise are known (e.g., normally distributed), or requiring that the relationships between the different sources of error are specified since an algebraic solution of error propagation ('bottom-up' approach) is not required.
+
+\section{Results and discussion}
+
+\subsection{Comparison between backscatter and height}
+
+Our comparison between the height-change time series with changes in backscatter for all ice-shelf grid cells around Antarctica (Figure \ref{c2f5}) showed that the majority of the grid cells presented a positive correlation (indicative of densification of the surface) instead of a negative one (indicative of penetration). The backscatter variation impacts significantly the estimated height-changes (correlation $r \approx 0.81$) and the respective correction greatly reduces this effect (correlation $r \approx 0.16$). The anti-correlation between backscatter variation and modeled firn-height changes (correlation $r \approx -0.73$) implies that backscatter increases with firn compaction (densification of the surface), which fluctuates with the seasons. That is, for an increase in backscatter (presumably due to densification) there is an apparent increase in height even though surface densification implies compaction of the firn layer (surface lowering).
+
+\subsection{Trend and acceleration in ice-shelf height change}
+
+We derived two main products from our 18-year long, high-resolution ($\sim$3 months and $\sim$30 km) record of ice-shelf height change.
+
+\paragraph{Regionally-averaged time series.} Regional averaging increases the statistical significance of the information that can be recovered from the available data ({\it e.g.}, acceleration from the curvature of the fit). We computed circum-Antarctic average time series of height change from 1994 to 2012 for West Antarctic, East Antarctic and all Antarctic ice shelves (Figure \ref{c2f7}). These results have revealed accelerated losses in total Antarctic ice-shelf volume at decadal time scale \parencite{Paolo2015}.
+
+\paragraph{High-resolution spatial maps.} With analysis at the grid-cell level it is possible to map, for most of the Antarctic ice-shelf area, the spatial structure of the 18-year average rate of change, average acceleration and instantaneous rates in ice-shelf surface height (Figure \ref{c2f9}). Mapping higher-order terms such as average acceleration (slope of the derivative of the trend) reveals the regional contribution to the accelerated loss. The primary factor in the overall acceleration of the Antarctic rate of ice-shelf loss is the cessation (or deceleration) of earlier gains in the East Antarctic ice shelves \parencite{Paolo2015}.
+
+
+\begin{figure}[!ht]
+  \includegraphics[width=\textwidth]{../img/map_4panels_v5.png}
+  \caption{
+  Maps of rate and acceleration of Antarctic ice-shelf height change. (top) 18-year average rate and acceleration of ice-shelf height change; (bottom) instantaneous rate of change in surface height for 2000 and 2012. Rates and acceleration were derived from polynomial models, such that (a) negative acceleration represents either increase loss-rate or decrease gain-rate (and vice-versa for positive acceleration), and (b) instantaneous rates reflect the decadal fluctuations.
+  } 
+  \label{c2f9}
+\end{figure}
+
+
+\subsection{Processes affecting RA-derived ice-shelf height}
+
+The main sources of uncertainty affecting our ability to use RA-derived height estimates (instantaneous and/or trend) over the Antarctic ice shelves are as follows:
+
+\begin{itemize}
+  \item[i.]     {\it Surface and volume scattering variation}, $\mathcal{O}(1) \text{m}$. Despite considerable progress, ongoing investigation on the interaction of the radar wave with the snow/firn/ice surface and how the surface properties change over time is essential, particularly for the modern CryoSat-2 radar mission and its innovative Doppler-delay altimeter system \parencite{Wingham2006}.
+  \item[ii.] 	{\it Firn-column changes}, $\mathcal{O}(\text{0.01--1}) \text{m}$. This effect is important to separate the mass-loss-driven changes from the surface-compaction-driven changes in the RA observation. However, there is still no reliable model-derived correction to account for this effect at the small spatial scales (tens of kilometers) that we are considering.
+  \item[iii.]   {\it Atmospheric pressure}, $\mathcal{O}(\text{0.01--0.1}) \text{m}$. Since ice shelves are floating, depressions on the sea-surface height force by changes in atmospheric pressure (inverse barometer effect) will be included in the altimeter ice-shelf-height measurement. There is considerable fluctuation and significant trend in the atmospheric pressure around the Antarctic ice shelves \parencite{Padman2003}, especially on the time scales of a few years that we attempt to resolve here.
+  \item[iv.]    {\it Regional sea level trend}, $\mathcal{O}(\text{0.01--0.1}) \text{m}$. The trend in sea-level rise (which includes changes in the geoid) varies considerably from the global average ($\sim$3 mm/yr) at the regional scale \parencite{Church2004}; and this becomes particularly important when making inferences of ice-shelf height over long time periods ({\it e.g.}, decades).
+  \item[v.]     {\it Advection of surface topographic features}, $\mathcal{O}(\text{1--10}) \text{m}$. The relatively large footprint size ($\sim$3 km) of pulse-limited RAs can lead to moving topographic features ({\it e.g.}, megaripples and crevasses) being misinterpreted as interannual fluctuations in ice-shelf surface and derived changes in basal mass balance (melting).
+  \item[vi.]    {\it Errors in ocean tide and load tide corrections}, $\mathcal{O}(\text{0.01--0.1}) \text{m}$. Ocean tide height changes can be large, up to $\sim$8 m at spring tides under the southern Ronne Ice Shelf. Standard tide model corrections reduce the tide-induced height error to $<$0.1 m \parencite{King2005, King2011, Stammer2014}. Further reduction by averaging is not effective because the ocean tide is a long-wavelength process. Instead, improvements in tide models are required.
+\end{itemize}
+
+\subsection{Methodological limitations}
+
+We are unable to sample near the ice-shelf grounding line. Our grid-cell size is limited by the spatial distribution of the satellite ground-track crossing points (Figure \ref{c2f1}). We have eliminated all crossovers within 3 km of the grounding line where data may be corrupted due to the floating-to-grounded transition (high slopes, crevasses, and flexure so that hydrostatic corrections for ocean height do not work). These sampling issues are most severe for small ice shelves that have large melt rates in the grounding zone (such as Pine Island and Dotson), and imply that estimated ice-shelf loss could be higher than our analyses suggest.
+
+During the observation period, some ice shelves experienced significant grounding-line retreat \parencite{Rignot2014}, without a commensurate retreat of their ice fronts, meaning that those ice shelves increased in area. This ice-shelf migration could impact the average value of volume loss if the new ice-shelf thickness is taken into account, although these area changes are small relative to the total ice-shelf area (less than 7\%). Since our objective is to map and quantify the varying impacts of the ocean and atmosphere to ice loss around the Antarctic ice shelves, we used a fixed area approach ({\it i.e.}, Eulerian reference frame).
+
+\section*{Summary}
+
+We have presented a method for optimal analyses of height data from multiple satellite RAs and quantifying uncertainties in the resulting data products. Using this method, we constructed an 18-year time series of height changes at $\sim$30 km grid cells and $\sim$3 month intervals over Antarctica's floating ice shelves. Our data set allowed us to estimate the temporal progression and spatial structure of ice-shelf height changes in Antarctica between 1994 and 2012.
+
+We have demonstrated the following. Substantial averaging both in time and space is required to construct reliable RA height records over floating ice shelves. Densification of the surface strongly affects the height-change estimate, and the backscatter correction significantly reduces this effect. Densification is a more important effect than penetration in biasing the height-change estimates over the ice shelves Given the high interannual-to-decadal variability that is present, a simple straight-line fit fails to capture the underlying trends, some degree of curvature in the trend is needed. Polynomial trends allow us to obtain information on the evolution and spatial structure of changes, {\it e.g.}, instantaneous rate of change (derivative of the trend), and average acceleration (slope of the derivative). Given the convoluted nature of the error sources, we propose that a top-down approach for uncertainty estimation ({\it e.g.}, bootstrap applied to time-dependent data) constitutes a more accurate alternative for error analysis.
+
+\section*{Acknowledgements}
+
+This work was funded by NASA (awards NNX12AN50H 002 (93735A), NNX10AG19G and NNX13AP60G). This is ESR contribution XXX. We thank J. Zwally's Ice Altimetry group at the NASA Goddard Space Flight Center for distributing their RA data sets for all satellite radar altimeter missions ({\tt http://icesat4.gsfc.nasa.gov}). We are grateful to G. Hyland of the Australian Antarctic Division in Hobart for running the Davis S/V algorithm used to make Figure \ref{c2f4}. We thank C. Davis and D. Wingham for RA processing advice. We thank A. Shepherd for helpful comments that improved the manuscript. We also thank the San Diego Supercomputing Center for their assistance in HPC. 
