@@ -466,17 +466,20 @@
     \thispagestyle{empty}
     \setcounter{page}{1}
 
-    \null\vfil
+    %\null\vfil % modified by Fernando Paolo
   \begin{center}
     \fmfont
     UNIVERSITY OF CALIFORNIA, {\expandafter\uppercase\expandafter{\@campus}}\par
-    \bigskip \medskip
+    \null\vfil  % modified by Fernando Paolo
+    \bigskip \bigskip \bigskip \bigskip \bigskip
     {\bfseries
      {\@title} \par}
-    \bigskip \medskip
-    A dissertation submitted in partial satisfaction of the \par 
+    %\bigskip \medskip  % modified by Fernando Paolo
+    \bigskip \bigskip \bigskip \bigskip  % modified by Fernando Paolo
+    \null\vfil  % modified by Fernando Paolo
+    A dissertation submitted in partial satisfaction \par
 	\smallskip
-    requirements for the degree \par 
+    of the requirements for the degree \par 
 	\smallskip
     {\@degreetitle} \par
     \bigskip \medskip
@@ -499,10 +502,11 @@
        {\@othermembers}
     \end{quote}
     \begin{center}
+      \null\vfil  % modified by Fernando Paolo
       {\@degreeyear}
     \end{center}
   }
-  \vfil\null
+  %\vfil\null  % modified by Fernando Paolo
 \end{alwayssingle}
 
 } 
@@ -668,16 +672,33 @@ on microfilm and electronically: }}\\
 % Special label for the vita list
 %
 \def\vitalabel#1{#1\hfill}
-\def\vita{\begin{center}VITA\end{center}
-     \list{}{\ssp \leftmargin 1.5in \labelwidth 1.2in \let\makelabel\vitalabel
+\def\vita{\begin{center}EDUCATION\end{center}
+     %\list{}{\ssp \leftmargin 1.5in \labelwidth 1.2in \let\makelabel\vitalabel % original
+     \list{}{\ssp \leftmargin 1in \labelwidth 0.7in \let\makelabel\vitalabel
            \labelsep 0.3in}}
 \let\endvita\endlist
-
+%
+% Special label for the awards list
+% added by Fernando Paolo, Jul 30, 2015 <fspaolo@gmail.com>
+%
+\def\vitalabel#1{#1\hfill}
+\def\awards{\medskip\begin{center}AWARDS\end{center}
+     \list{}{\ssp \leftmargin 1in \labelwidth 0.7in \let\makelabel\vitalabel
+           \labelsep 0.3in}}
+\let\endawards\endlist
+%
 % For making "bibliographic-like" entries on the Vita page
 %
 \def\publications{\medskip\begin{center}PUBLICATIONS\end{center}
      \list{}{\ssp \leftmargin\z@}}
 \let\endpublications\endlist
+%
+% Special label for Field of study 
+% added by Fernando Paolo, Aug 11, 2015 <fspaolo@gmail.com>
+%
+\def\coursework{\medskip\begin{center}COURSEWORK\end{center}
+     \list{}{\ssp \leftmargin\z@}}
+\let\endcoursework\endlist
 
 % ABSTRACT
 %
@@ -696,20 +717,20 @@ on microfilm and electronically: }}\\
   \begin{center}
   \ssp
   {\fmfont
-  \null\vspace{1.25in}  
+  %\null\vspace{1.25in}  % comment this to get the text up to the top merging (Fernando Paolo)
   {\expandafter\uppercase\expandafter{\abstractlongname}}\par
-  \vspace{.5in}
+  \vspace{.21in}
   {\bfseries
     {\@title} \par}
-  \vspace{.5in}
+  \vspace{.21in}
   by\par
-  \vspace{.5in}
+  \vspace{.21in}
   \@author\par
-  \vspace{.3in}
+  \vspace{.06in}
   {\@degreetitle} in \@field\par
-  \vspace{.3in}
+  \vspace{.06in}
   University of California, {\@campus}, \@degreeyear \par
-  \vspace{.3in}
+  \vspace{.06in}
   {\UCSD@chair}, \UCSD@text@chair
   %Check if there is a co-chair and add accordingly.
   \ifx\UCSD@cochair\@isnotdefined 
@@ -717,7 +738,7 @@ on microfilm and electronically: }}\\
     \par
     {\UCSD@cochair}, \UCSD@text@cochair
   \fi
-  \vspace{.3in}
+  \vspace{.2in}
   } % Closes fmfont above
   \end{center}
   \par
@@ -1082,7 +1103,8 @@ on microfilm and electronically: }}\\
   \phantomsection
   \addcontentsline{toc}{frontmatter}{\protect\numberline{}\contentslongname}%
   \centerline{\expandafter\uppercase\expandafter{\contentslongname}}%
-  \bigskip%
+  %\bigskip%
+  \vskip .6em
 %  \chapter*{\contentsname
 %        \@mkboth{\uppercase{\contentsname}}{\uppercase{\contentsname}}}%
   {\ssp\@starttoc{toc}}\if@restonecol\twocolumn\fi}
@@ -1135,7 +1157,7 @@ on microfilm and electronically: }}\\
 % Use the following line to have the front matter title aligned with 
 % the chapter titles.  Otherwise they will aligned to the left (as required by OGS.)
 %\setlength{\UCSD@toc@frontmatterLength}{0em}
-\def\l@frontmatter{\normalfont\vskip 1em plus 1pt \@dottedtocline{0}{0em}{\UCSD@toc@frontmatterLength}}
+\def\l@frontmatter{\normalfont\vskip .1em plus 1pt \@dottedtocline{0}{0em}{\UCSD@toc@frontmatterLength}}
 
 
 \newlength{\UCSD@toc@backmatterLength}

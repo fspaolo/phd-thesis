@@ -109,6 +109,13 @@ bottom=1in,
 ]{geometry}
 
 
+%% LANGUAGE AND QUOTATION MARKS
+% it fixes quotation marks: " " => `` ''
+\usepackage [english]{babel}
+\usepackage [autostyle, english=american]{csquotes}
+\MakeOuterQuote{"}
+
+
 %% MICROTYPE
 \usepackage[
 activate={true,nocompatibility},
@@ -133,22 +140,24 @@ shrink=10
 
 % FOOTNOTES - formatting the defaul footnotes (reverse indent and marging)
 \makeatletter
-\renewcommand\@makefntext[1]{\leftskip=2em\hskip-0em\@makefnmark#1} % 2em and -2em
+\renewcommand\@makefntext[1]{\leftskip=2em\hskip-2em\@makefnmark#1} % 2em and -2em
 \makeatother
 
 %% AMS PACKAGES - Chances are you will want some or all 
 %    of these if writing a dissertation that includes equations.
 \usepackage{amsmath, amscd, amssymb, amsthm}
-%\usepackage{mathtools}
 
 % Define a command \overbar, which reduces the width of \overline by 1.5mu on each side
-\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+\newcommand{\overbar}[1]{\mkern1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+% Define a command \del, which reduces the spacing of \partial by 1.5mu on the right 
+\newcommand{\del}[1][]{\partial\mkern-1.5mu}
+
 
 % Define a command \vect, for bold non-italic vector notation
 \newcommand{\vect}[1]{\mathbf{#1}} % undergrad algebra version
 %\newcommand{\vect}[1]{#1}          % pure math version
 %\newcommand{\vect}[1]{\bm{#1}}     % ISO complying version
-
 
 %% BOLD MATH
 \usepackage{bm}
@@ -159,7 +168,7 @@ shrink=10
 %% GRAPHICX - This is the standard package for 
 %    including graphics for latex/pdflatex.
 %    use 'draft' to replace the figures with a black frame
-\usepackage[draft]{graphicx}
+\usepackage[final]{graphicx}  % final | draft
 
 %% SUBFIG - Use this to place multiple images in a
 %    single figure.  Subfig will handle placement and
@@ -169,6 +178,11 @@ shrink=10
 %% CAPTIONS - Use this to customized captions 
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 \usepackage[leftcaption,raggedright]{sidecap}
+% the following format will be used to emulate the captions produced by fltpage
+\DeclareCaptionLabelFormat{adja-page}{\hrulefill\\#1 #2 (\emph{previous page})}
+
+%% TABLES
+\usepackage{longtable}
 
 %% FONTS - replacements for Computer Modern
 % Times
@@ -182,6 +196,8 @@ shrink=10
 \usepackage[T1]{fontenc}
 \usepackage[charter]{mathdesign} % w/math
 
+% URLs with hyphenation
+\usepackage[hyphens]{url}
 
 % DROP CAPS
 \usepackage{lettrine}
@@ -200,18 +216,53 @@ shrink=10
 % BIBLIOGRAPHY - Set to be handled with LaTeX + BibLaTeX
 \usepackage[
 backend=bibtex,
-style=alphabetic,
-citestyle=authoryear,
+style=authoryear,
+%citestyle=authoryear,
+%bibstyle=alpha,
+maxnames=2,
 firstinits=true,
+uniquename=false,
 isbn=false,
 url=false,
-doi=true,
+doi=false,
 eprint=false,
 refsegment=chapter,    % if using a global .bib file
 %refsection=chapter,   % if using multiple .bib files
 ]{biblatex}
 
-\bibliography{myrefs}  % global bibliography file
+% suppress 'field' from refs
+\AtEveryBibitem{%
+  \clearfield{day}%
+  \clearfield{month}%
+  \clearfield{note}%
+  \clearfield{issue}%
+  \clearfield{number}%
+  \clearfield{series}%
+} 
+
+% suppress 'pp.' before page number
+\DeclareFieldFormat{pages}{#1}
+
+% thin spaces between initials
+\renewcommand*{\mkbibnamefirst}[1]{{\iffirstinits{\let~\,}{}#1}}
+
+% suppres 'in:' for journal names
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+
+% to use square brackets instead of parenthesis
+\newrobustcmd*{\parentexttrack}[1]{%
+  \begingroup
+  \blx@blxinit
+  \blx@setsfcodes
+  \blx@bibopenparen#1\blx@bibcloseparen
+  \endgroup}
+\AtEveryCite{%
+  \let\parentext=\parentexttrack%
+  \let\bibopenparen=\bibopenbracket%
+  \let\bibcloseparen=\bibclosebracket}
+
+\bibliography{thesis}  % global bibliography file
 
 %% HYPERLINKS
 %   To create a PDF with hyperlinks, you need to include the hyperref package.
@@ -240,10 +291,7 @@ refsegment=chapter,    % if using a global .bib file
 %% FRONT MATTER
 %
 %  This includes the title, degree, dedication, vita, abstract, etc..
-%\include{frontmatter}
-
-
-
+\include{frontmatter}
 
 
 %% DISSERTATION
@@ -254,17 +302,17 @@ refsegment=chapter,    % if using a global .bib file
 % Then use the commands:
 
 \include{chapter1}
-[MAKE REFERENCES SINGLE-SPACED WITH A DOUBLE SPACE BETWEEN ENTRIES]
-\printbibliography[segment=1,heading=subbibliography]
-
+\printbibliography[segment=1,heading=subbibliography,maxnames=5]
+%%
 \include{chapter2}
-\printbibliography[segment=2,heading=subbibliography]
-
+\printbibliography[segment=2,heading=subbibliography,maxnames=5]
+%%
 \include{chapter3}
-\printbibliography[segment=3,heading=subbibliography]
+\printbibliography[segment=3,heading=subbibliography,maxnames=5]
 
-%\include{chapter4}
-%\printbibliography[segment=4,heading=subbibliography]
+\include{chapter4}
+\printbibliography[segment=4,heading=subbibliography,maxnames=5]
+
 
 %
 % Of course, if you prefer, you can just start with

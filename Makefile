@@ -9,6 +9,7 @@ default:
 	pdflatex $(TEXFILE)
 	bibtex $(BIBFILE)
 	pdflatex $(TEXFILE)
+	pdflatex $(TEXFILE)
 
 show:
 	$(PDFREADER) $(PDFFILE) &
