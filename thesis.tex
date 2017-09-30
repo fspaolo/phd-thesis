@@ -104,8 +104,10 @@
 
 %% MARGINS
 \usepackage[
-right=1.3in,
-bottom=1in,
+left=1.5in,
+right=1in,
+top=1in,
+bottom=1.25in,
 ]{geometry}
 
 
@@ -198,6 +200,7 @@ shrink=10
 
 % URLs with hyphenation
 \usepackage[hyphens]{url}
+\urlstyle{rm}
 
 % DROP CAPS
 \usepackage{lettrine}
@@ -262,6 +265,18 @@ refsegment=chapter,    % if using a global .bib file
   \let\bibopenparen=\bibopenbracket%
   \let\bibcloseparen=\bibclosebracket}
 
+\DeclareCiteCommand{\citeyearpar}[\mkbibparens]
+  {\boolfalse{citetracker}%
+   \boolfalse{pagetracker}%
+   \usebibmacro{prenote}}
+  {\printfield{year}\printfield{extrayear}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+% spacing between entries
+\setlength{\bibitemsep}{.3cm}
+
+%\setlength{\bibitemsep}{\baselineskip}
 \bibliography{thesis}  % global bibliography file
 
 %% HYPERLINKS
@@ -302,16 +317,28 @@ refsegment=chapter,    % if using a global .bib file
 % Then use the commands:
 
 \include{chapter1}
-\printbibliography[segment=1,heading=subbibliography,maxnames=5]
+\begingroup
+\ssp
+\printbibliography[segment=1,heading=subbibliography,maxnames=99]
+\endgroup
 %%
 \include{chapter2}
-\printbibliography[segment=2,heading=subbibliography,maxnames=5]
+\begingroup
+\ssp
+\printbibliography[segment=2,heading=subbibliography,maxnames=99]
+\endgroup
 %%
 \include{chapter3}
-\printbibliography[segment=3,heading=subbibliography,maxnames=5]
+\begingroup
+\ssp
+\printbibliography[segment=3,heading=subbibliography,maxnames=99]
+\endgroup
 
 \include{chapter4}
-\printbibliography[segment=4,heading=subbibliography,maxnames=5]
+\begingroup
+\ssp
+\printbibliography[segment=4,heading=subbibliography,maxnames=99]
+\endgroup
 
 
 %

@@ -471,7 +471,7 @@
     \fmfont
     UNIVERSITY OF CALIFORNIA, {\expandafter\uppercase\expandafter{\@campus}}\par
     \null\vfil  % modified by Fernando Paolo
-    \bigskip \bigskip \bigskip \bigskip \bigskip
+    \bigskip \bigskip \bigskip \bigskip \bigskip \bigskip
     {\bfseries
      {\@title} \par}
     %\bigskip \medskip  % modified by Fernando Paolo
@@ -492,7 +492,7 @@
     {\@author} \par
   \end{center}
   {
-    \vspace{6ex}
+    \vspace{12ex}
     \fmsmallfont
     Committee in charge:
     \begin{quote}
@@ -504,6 +504,7 @@
     \begin{center}
       \null\vfil  % modified by Fernando Paolo
       {\@degreeyear}
+      \vspace{-.5cm} % modified by Fernando Paolo
     \end{center}
   }
   %\vfil\null  % modified by Fernando Paolo
@@ -526,6 +527,7 @@
 Copyright \par
 \@author, \@degreeyear\par
 All rights reserved.}
+\vspace{-.5cm} % added by Fernando Paolo
 \end{center}
 \end{alwayssingle}
 
@@ -668,11 +670,11 @@ on microfilm and electronically: }}\\
 \def\vitapage{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
      \else \newpage \fi\pagestyle{preliminary}
      \phantomsection
-     \addcontentsline{toc}{frontmatter}{\protect\numberline{}Vita and Publications}}
+     \addcontentsline{toc}{frontmatter}{\protect\numberline{}Vita}}
 % Special label for the vita list
 %
 \def\vitalabel#1{#1\hfill}
-\def\vita{\begin{center}EDUCATION\end{center}
+\def\vita{\begin{center}VITA\end{center}
      %\list{}{\ssp \leftmargin 1.5in \labelwidth 1.2in \let\makelabel\vitalabel % original
      \list{}{\ssp \leftmargin 1in \labelwidth 0.7in \let\makelabel\vitalabel
            \labelsep 0.3in}}
@@ -696,7 +698,7 @@ on microfilm and electronically: }}\\
 % Special label for Field of study 
 % added by Fernando Paolo, Aug 11, 2015 <fspaolo@gmail.com>
 %
-\def\coursework{\medskip\begin{center}COURSEWORK\end{center}
+\def\coursework{\medskip\begin{center}FIELDS OF STUDY\end{center}
      \list{}{\ssp \leftmargin\z@}}
 \let\endcoursework\endlist
 
@@ -717,28 +719,28 @@ on microfilm and electronically: }}\\
   \begin{center}
   \ssp
   {\fmfont
-  %\null\vspace{1.25in}  % comment this to get the text up to the top merging (Fernando Paolo)
+  \null\vspace{1.25in}  
   {\expandafter\uppercase\expandafter{\abstractlongname}}\par
-  \vspace{.21in}
+  \vspace{.5in}
   {\bfseries
     {\@title} \par}
-  \vspace{.21in}
+  \vspace{.5in}
   by\par
-  \vspace{.21in}
+  \vspace{.5in}
   \@author\par
-  \vspace{.06in}
+  \vspace{.3in}
   {\@degreetitle} in \@field\par
-  \vspace{.06in}
+  \vspace{.3in}
   University of California, {\@campus}, \@degreeyear \par
-  \vspace{.06in}
-  {\UCSD@chair}, \UCSD@text@chair
+  \vspace{.3in}
+  {Professor \UCSD@chair}, \UCSD@text@chair
   %Check if there is a co-chair and add accordingly.
   \ifx\UCSD@cochair\@isnotdefined 
   \else
     \par
     {\UCSD@cochair}, \UCSD@text@cochair
   \fi
-  \vspace{.2in}
+  \vspace{.3in}
   } % Closes fmfont above
   \end{center}
   \par
@@ -1103,8 +1105,7 @@ on microfilm and electronically: }}\\
   \phantomsection
   \addcontentsline{toc}{frontmatter}{\protect\numberline{}\contentslongname}%
   \centerline{\expandafter\uppercase\expandafter{\contentslongname}}%
-  %\bigskip%
-  \vskip .6em
+  \bigskip%
 %  \chapter*{\contentsname
 %        \@mkboth{\uppercase{\contentsname}}{\uppercase{\contentsname}}}%
   {\ssp\@starttoc{toc}}\if@restonecol\twocolumn\fi}
@@ -1157,7 +1158,7 @@ on microfilm and electronically: }}\\
 % Use the following line to have the front matter title aligned with 
 % the chapter titles.  Otherwise they will aligned to the left (as required by OGS.)
 %\setlength{\UCSD@toc@frontmatterLength}{0em}
-\def\l@frontmatter{\normalfont\vskip .1em plus 1pt \@dottedtocline{0}{0em}{\UCSD@toc@frontmatterLength}}
+\def\l@frontmatter{\normalfont\vskip 1em plus 1pt \@dottedtocline{0}{0em}{\UCSD@toc@frontmatterLength}}
 
 
 \newlength{\UCSD@toc@backmatterLength}
@@ -1607,7 +1608,7 @@ on microfilm and electronically: }}\\
 \def\ps@facingcaption{\let\@mkboth\@gobbletwo
      \def\@oddhead{\rmfamily\thepage\hfil} \def\oddfoot{}
      \let\@evenhead\@oddhead \def\@evenfoot{}
-     \oddsidemargin 0in \let\evensidemargin\oddsidemargin
+     \oddsidemargin 0.3in \let\evensidemargin\oddsidemargin
 }
 
 
